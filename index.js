@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors())
 app.get('/', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(__dirname + '/index.html');
 });
 
