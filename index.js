@@ -2,9 +2,17 @@ var express = require('express')
 var cors = require('cors')
 var app = express()
 const http = require('http').Server(app);
+
+var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
 const io = require('socket.io')(http,{
   cors: {
-    origin: "https://learnmyskills.com",
+    origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
     methods: ["GET", "POST"]
   }
 });
