@@ -37,7 +37,7 @@ http.listen(port, () => {
   console.log(`Socket.IO server running at http://localhost:${port}/`);
 });
 
-/ Entire gameCollection Object holds all games and info
+// Entire gameCollection Object holds all games and info
 
 var gameCollection =  new function() {
 
