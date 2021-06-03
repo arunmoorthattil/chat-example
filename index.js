@@ -40,6 +40,15 @@ io.on('connection', (socket) => {
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
+  
+  // when the client emits 'add user', this listens and executes
+  socket.on('add user', username => {
+      clients.push(username);
+       ++numUsers;
+     // echo globally (all clients) that a person has connected
+    io.emit('user joined' ,JSON.stringify(clients));
+  });
+  
 
 function removeItemFromArray(array, n) {
     const index = array.indexOf(n);
