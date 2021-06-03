@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
   });
   
     socket.on('add user', msg => {
-    io.emit('chat message', msg);
+    io.emit('user joined', msg);
   });
 
 function removeItemFromArray(array, n) {
