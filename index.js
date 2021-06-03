@@ -41,7 +41,7 @@ var users = [];
   });
   
     socket.on('add user', user => {
-      if (!users[user]) { 
+      if (!userExists[users,user]) { 
      users.push(user);
        io.emit('user joined',users);
     }   
@@ -58,6 +58,17 @@ function removeItemFromArray(array, n) {
         array.splice(index, 1);
     }
     return array;
+}
+  
+  function userExists(array, n) {
+    const index = array.indexOf(n);
+
+    // if the element is in the array, remove it
+    if(index > -1) {
+
+       return true 
+    }
+    return false;
 }
 
 });
