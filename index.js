@@ -42,7 +42,8 @@ io.on('connection', (socket) => {
   });
   
     socket.on('add user', msg => {
-    io.emit('user joined', msg);
+    console.log("Message: " + JSON.stringify(msg));
+    io.emit('user joined', JSON.stringify([1,2]));
   });
 
 function removeItemFromArray(array, n) {
