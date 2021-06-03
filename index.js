@@ -43,8 +43,7 @@ var clients = {};
   });
   
     socket.on('add user', user => {
-      var userString = JSON.parse(user);
-    io.emit('user joined',userString);
+    io.emit('user joined',user);
   });
 
 function removeItemFromArray(array, n) {
