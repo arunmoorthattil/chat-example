@@ -41,7 +41,7 @@ var users = [];
   });
   
     socket.on('add user', user => {
-      if (!userExists[users,user]) { 
+      if (!userExists(users,user)) { 
      users.push(user);
        io.emit('user joined',users);
     }   
