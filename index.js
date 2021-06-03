@@ -34,16 +34,14 @@ http.listen(port, () => {
 // Chatroom
 
 io.on('connection', (socket) => {
- 
-var numUsers = 0;
-var clients = {};
+var users = {};
   
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
   
     socket.on('add user', user => {
-      clients.push(user);
+     users[user]=user;
     io.emit('user joined',user);
   });
 
