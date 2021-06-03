@@ -17,7 +17,7 @@ const io = require('socket.io')(http,{
     methods: ["GET", "POST"]
   }
 });
-var clients = {};
+
 var loopLimit = 0;
 const port = process.env.PORT || 3000;
 
@@ -33,17 +33,19 @@ http.listen(port, () => {
 
 // Chatroom
 
-var numUsers = 0;
-
 io.on('connection', (socket) => {
  
+var numUsers = 0;
+var clients = {};
+  
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
   
-    socket.on('add user', msg => {
-    console.log("Message: " + JSON.stringify(msg));
-    io.emit('user joined', JSON.stringify([1,2]));
+    socket.on('add user', user => {
+      clients.push(user);
+    console.log("Message: " + JSON.stringify(user));
+    io.emit('user joined', JSON.stringify(clients));
   });
 
 function removeItemFromArray(array, n) {
