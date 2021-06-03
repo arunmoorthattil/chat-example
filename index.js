@@ -42,7 +42,7 @@ var users = {};
   
     socket.on('add user', user => {
      users[user]=user;
-    io.emit('user joined',user);
+    io.emit('user joined',users);
   });
 
 function removeItemFromArray(array, n) {
