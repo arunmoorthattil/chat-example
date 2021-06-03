@@ -43,6 +43,7 @@ var clients = {};
   });
   
     socket.on('add user', user => {
+      clients.push(user);
      var users=JSON.stringify(clients);
     io.emit('user joined',users);
   });
