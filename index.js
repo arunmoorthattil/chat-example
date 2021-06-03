@@ -41,8 +41,11 @@ var users = [];
   });
   
     socket.on('add user', user => {
+      if (!users[user]) { 
      users.push(user);
-    io.emit('user joined',users);
+       io.emit('user joined',users);
+    }   
+   
   });
 
 function removeItemFromArray(array, n) {
