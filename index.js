@@ -46,16 +46,13 @@ io.on('connection', (socket) => {
       clients.push(username);
     ++numUsers;
      // echo globally (all clients) that a person has connected
-    io.emit('user joined',
-      userList: clients);
+    io.emit('user joined',clients);
   });
-
   // when the client emits '  leave user', this listens and executes
   socket.on('leave user', function (username) {
     --numUsers;
     removeItemFromArray(clients,username);
-    io.emit('user left', 
-      userList: clients
+    io.emit('user left', clients
    );
   });
 
@@ -70,4 +67,5 @@ function removeItemFromArray(array, n) {
     }
     return array;
 }
+
 });
