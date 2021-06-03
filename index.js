@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
       clients.push(username);
        ++numUsers;
      // echo globally (all clients) that a person has connected
-    io.emit('user joined' ,JSON.stringify(clients));
+    io.emit('user joined' ,username);
   });
   
 
