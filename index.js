@@ -41,5 +41,33 @@ io.on('connection', (socket) => {
     io.emit('chat message', msg);
   });
 
+  // when the client emits 'add user', this listens and executes
+  socket.on('add user', function (username) {
+      clients.push(username);
+    ++numUsers;
+     // echo globally (all clients) that a person has connected
+    io.emit('user joined',
+      userList: clients);
+  });
 
+  // when the client emits '  leave user', this listens and executes
+  socket.on('leave user', function (username) {
+    --numUsers;
+    removeItemFromArray(clients,username);
+    io.emit('user left', 
+      userList: clients
+   );
+  });
+
+function removeItemFromArray(array, n) {
+    const index = array.indexOf(n);
+
+    // if the element is in the array, remove it
+    if(index > -1) {
+
+        // remove item
+        array.splice(index, 1);
+    }
+    return array;
+}
 });
