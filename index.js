@@ -17,7 +17,7 @@ const io = require('socket.io')(http,{
     methods: ["GET", "POST"]
   }
 });
-
+var clients = {};
 var loopLimit = 0;
 const port = process.env.PORT || 3000;
 
@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+      clients[data.username] = {
+      "socket": socket.id
+    };
+  
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
