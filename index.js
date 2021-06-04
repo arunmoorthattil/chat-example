@@ -30,12 +30,10 @@ app.get('/', (req, res) => {
 http.listen(port, () => {
   console.log(`Socket.IO server running at http://localhost:${port}/`);
 });
-
+var users = [];
 // Chatroom
 
 io.on('connection', (socket) => {
-var users = [];
-  
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
