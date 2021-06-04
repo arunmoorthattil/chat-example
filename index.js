@@ -51,6 +51,11 @@ io.on('connection', (socket) => {
      }    
 });
 
+    socket.on('user reload', user => {
+     io.emit('user joined',users);    
+});
+
+  
 function removeItemFromArray(array, n) {
     const index = array.indexOf(n);
 
