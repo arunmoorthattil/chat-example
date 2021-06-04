@@ -3,6 +3,7 @@ var cors = require('cors')
 var fs = require('fs');
 var app = express()
 const http = require('http').Server(app);
+var LichessStrategy = require('passport-lichess').Strategy;
 
 var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
 const io = require('socket.io')(http,{
@@ -17,6 +18,31 @@ const io = require('socket.io')(http,{
     methods: ["GET", "POST"]
   }
 });
+
+
+passport.use(new LichessStrategy({
+    clientID: "ckS0HR27DBrgPQo6",
+    clientSecret: "hil6cT0hbPTIbevd1mXlFNfOfFBYhPMK",
+    callbackURL: "https://puzzlebattles.herokuapp.com/auth/lichess/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ lichessId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+app.get('/auth/lichess',
+  passport.authenticate('lichess'));
+ 
+app.get('/auth/lichess/callback',
+  passport.authenticate('lichess', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
 
 var loopLimit = 0;
 const port = process.env.PORT || 3000;
