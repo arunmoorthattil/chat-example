@@ -44,6 +44,12 @@ io.on('connection', (socket) => {
      }   
     io.emit('user joined',users);
   });
+  
+  socket.on('user left', user => {
+       if ( removeItemFromArray(users,user)) { 
+      io.emit('user left',users);
+     }    
+});
 
 function removeItemFromArray(array, n) {
     const index = array.indexOf(n);
