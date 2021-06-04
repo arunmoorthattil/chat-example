@@ -3,6 +3,7 @@ var cors = require('cors')
 var fs = require('fs');
 var app = express()
 const http = require('http').Server(app);
+var passport = require('passport');
 var LichessStrategy = require('passport-lichess').Strategy;
 
 var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
