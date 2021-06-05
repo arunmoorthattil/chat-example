@@ -24,30 +24,6 @@ var loopLimit = 0;
 const port = process.env.PORT || 3000;
 
 
-
-/* --- Fill in your app config here --- */
-const client = new oauth.AuthorizationCode({
-  client: {
-    id: 'ckS0HR27DBrgPQo6',
-    secret: 'hil6cT0hbPTIbevd1mXlFNfOfFBYhPMK'
-  },
-  auth: {
-    tokenHost: 'https://oauth.lichess.org',
-    authorizePath: '/oauth/authorize',
-    tokenPath: '/oauth'
-  },
-  http: {
-    json: true
-  }
-});
-const redirectUri = `https://puzzlebattles.herokuapp.com/callback`;
-const authorizationUri = client.authorizeURL({
-  redirect_uri: redirectUri,
-  scope: ['preference:read'], // see https://lichess.org/api#section/Introduction/Rate-limiting
-  state: Math.random().toString(36).substring(2)
-});
-
-
 app.use(cors())
 
 
