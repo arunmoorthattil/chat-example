@@ -2,6 +2,7 @@ var express = require('express')
 var cors = require('cors')
 var fs = require('fs');
 var app = express()
+var another = require('./index.js');
 const http = require('http').Server(app);
 
 var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
