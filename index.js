@@ -2,8 +2,6 @@ var express = require('express')
 var cors = require('cors')
 var fs = require('fs');
 var app = express()
-const oauth = require('simple-oauth2');
-const fetch = require('node-fetch');
 const http = require('http').Server(app);
 
 var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
@@ -23,16 +21,12 @@ const io = require('socket.io')(http,{
 var loopLimit = 0;
 const port = process.env.PORT || 3000;
 
-
 app.use(cors())
-
-
 app.get('/', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/login', (_, res) => res.send('Hello<br><a href="/auth">Log in with lichess</a>'));
 http.listen(port, () => {
   console.log(`Socket.IO server running at http://localhost:${port}/`);
 });
