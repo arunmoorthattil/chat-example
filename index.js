@@ -2,7 +2,8 @@ var express = require('express')
 var cors = require('cors')
 var fs = require('fs');
 var app = express()
-
+const oauth = require('simple-oauth2');
+const fetch = require('node-fetch');
 const http = require('http').Server(app);
 
 var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
@@ -21,6 +22,31 @@ const io = require('socket.io')(http,{
 
 var loopLimit = 0;
 const port = process.env.PORT || 3000;
+
+
+
+/* --- Fill in your app config here --- */
+const client = new oauth.AuthorizationCode({
+  client: {
+    id: 'ckS0HR27DBrgPQo6',
+    secret: 'hil6cT0hbPTIbevd1mXlFNfOfFBYhPMK'
+  },
+  auth: {
+    tokenHost: 'https://oauth.lichess.org',
+    authorizePath: '/oauth/authorize',
+    tokenPath: '/oauth'
+  },
+  http: {
+    json: true
+  }
+});
+const redirectUri = `https://puzzlebattles.herokuapp.com/callback`;
+const authorizationUri = client.authorizeURL({
+  redirect_uri: redirectUri,
+  scope: ['preference:read'], // see https://lichess.org/api#section/Introduction/Rate-limiting
+  state: Math.random().toString(36).substring(2)
+});
+
 
 app.use(cors())
 
