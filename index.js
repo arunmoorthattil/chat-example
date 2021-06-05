@@ -2,7 +2,7 @@ var express = require('express')
 var cors = require('cors')
 var fs = require('fs');
 var app = express()
-var another = require('./index.js');
+var  login = require('./login.js');
 const http = require('http').Server(app);
 
 var whitelist = ['https://learnmyskills.com', 'https://www.learnmyskills.com','http://www.learnmyskills.com','http://learnmyskills.com']
@@ -23,6 +23,8 @@ var loopLimit = 0;
 const port = process.env.PORT || 3000;
 
 app.use(cors())
+
+app.use('/login', login);
 app.get('/', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(__dirname + '/index.html');
